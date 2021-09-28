@@ -11,7 +11,7 @@ class VentanaPrincipal(QMainWindow):
         super().__init__()
         ancho = 800
         alto = 600
-        posicionIzquierda = 100
+        posicionIzquierda = 200
         posicionDerecha = 100
 
         self.setGeometry(posicionIzquierda, posicionDerecha, ancho, alto)
