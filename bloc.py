@@ -2,47 +2,51 @@
 from PyQt5.QtWidgets import *
 import sys
 
-f = open("texto.txt", "r")
-leido = f.readlines()
-    
 
 class VentanaPrincipal(QMainWindow):
-    def __init__(self,):
+    #Propiedades de la ventana 
+    def __init__(self):
         super().__init__()
         ancho = 800
         alto = 600
-        posicionIzquierda = 200
+        posicionIzquierda = 100
         posicionDerecha = 100
 
         self.setGeometry(posicionIzquierda, posicionDerecha, ancho, alto)
-        self.setWindowTitle("Mi Hijo")
+        self.setWindowTitle("Blocpy Pad")
 
+    #Se crea el contenedor vertical
         contenedorVertical = QVBoxLayout()
-        boton = QPushButton()
-        
 
+    #Para que ande el contendeor vertical
         widgetPrincipal = QWidget()
         widgetPrincipal.setLayout(contenedorVertical)
 
-        
-
         self.setCentralWidget(widgetPrincipal)
 
+    #Contenedor horizontal
         contenedorHorizontal = QHBoxLayout()
        
-        botonSaludar = QPushButton("Cargar")
-        contenedorHorizontal.addWidget(botonSaludar)
+    #Boton abrir
+        botonAbrir = QPushButton("Abrir")
+        contenedorHorizontal.addWidget(botonAbrir)
 
+    #Se prepara el contenedor horizontal
         contenedorVertical.addLayout(contenedorHorizontal)
 
+    #Boton guardar
+        botonGuardar = QPushButton()
+        botonGuardar.setText("Guardar")
+        contenedorHorizontal.addWidget(botonGuardar)
 
-        boton4 = QPushButton()
-        boton4.setText("Guardar")
-        contenedorHorizontal.addWidget(boton4)
+    #Boton Nuevo..
+        botonNuevo = QPushButton("Nuevo..")
+        contenedorHorizontal.addWidget(botonNuevo)
 
+        
         texto = QTextEdit()
-        texto.setText(leido)
         contenedorVertical.addWidget(texto)
+
 
 
 
