@@ -2,6 +2,14 @@
 from PyQt5.QtWidgets import *
 import sys
 
+#Abrir
+def leer(self, e):
+    f = open("texto.txt", "r")
+    self.leido = f.readline()
+    
+    self.texto.setText(self.leido)
+
+
 
 class VentanaPrincipal(QMainWindow):
     #Propiedades de la ventana 
@@ -43,11 +51,11 @@ class VentanaPrincipal(QMainWindow):
         botonNuevo = QPushButton("Nuevo..")
         contenedorHorizontal.addWidget(botonNuevo)
 
+    #Parte del texto
+        self.texto = QTextEdit()
+        contenedorVertical.addWidget(self.texto)
         
-        texto = QTextEdit()
-        contenedorVertical.addWidget(texto)
-
-
+        botonAbrir.clicked.connect(leer(self))
 
 
 
