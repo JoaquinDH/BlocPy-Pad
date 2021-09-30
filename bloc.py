@@ -2,14 +2,6 @@
 from PyQt5.QtWidgets import *
 import sys
 
-#Abrir
-def leer(self, e):
-    f = open("texto.txt", "r")
-    self.leido = f.readline()
-    
-    self.texto.setText(self.leido)
-
-
 
 class VentanaPrincipal(QMainWindow):
     #Propiedades de la ventana 
@@ -47,19 +39,22 @@ class VentanaPrincipal(QMainWindow):
         botonGuardar.setText("Guardar")
         contenedorHorizontal.addWidget(botonGuardar)
 
+        def open(self):
+            dialog.open() 
+
     #Boton Nuevo..
         botonNuevo = QPushButton("Nuevo..")
         contenedorHorizontal.addWidget(botonNuevo)
 
-    #Parte del texto
-        self.texto = QTextEdit()
-        contenedorVertical.addWidget(self.texto)
+        dialog = QFileDialog()
+        dialog.setFileMode(QFileDialog.AnyFile)
         
-        botonAbrir.clicked.connect(leer(self))
 
+        botonAbrir.clicked.connect(open)
+        
+          
 
-
-
+    ###########################################################3
 app = QApplication(sys.argv)
 
 ventana = VentanaPrincipal()
