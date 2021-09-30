@@ -1,4 +1,5 @@
-
+import os
+from PyQt5.QtCore import QFileInfo, QUrl
 from PyQt5.QtWidgets import *
 import sys
 
@@ -14,6 +15,22 @@ class VentanaPrincipal(QMainWindow):
 
         self.setGeometry(posicionIzquierda, posicionDerecha, ancho, alto)
         self.setWindowTitle("Blocpy Pad")
+
+    #Funciones
+        def abrir(self):
+            dialog.exec() 
+            seleccionado = dialog.selectedFiles()       
+
+            str1 = ''.join(seleccionado)
+
+            name = (os.path.basename(str1))
+
+            f = open("texto.txt", "r")
+            leido = f.read()
+            
+            texto.setText(leido)
+            
+
 
     #Se crea el contenedor vertical
         contenedorVertical = QVBoxLayout()
@@ -31,6 +48,8 @@ class VentanaPrincipal(QMainWindow):
         botonAbrir = QPushButton("Abrir")
         contenedorHorizontal.addWidget(botonAbrir)
 
+        botonAbrir.clicked.connect(abrir)
+       
     #Se prepara el contenedor horizontal
         contenedorVertical.addLayout(contenedorHorizontal)
 
@@ -39,22 +58,22 @@ class VentanaPrincipal(QMainWindow):
         botonGuardar.setText("Guardar")
         contenedorHorizontal.addWidget(botonGuardar)
 
-        def open(self):
-            dialog.open() 
+        
 
     #Boton Nuevo..
         botonNuevo = QPushButton("Nuevo..")
         contenedorHorizontal.addWidget(botonNuevo)
 
+    #Selector de File para botonAbrir
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.AnyFile)
         
-
-        botonAbrir.clicked.connect(open)
         
-          
-
-    ###########################################################3
+    #Parte del texto
+        texto = QTextEdit()
+        contenedorVertical.addWidget(texto)
+     
+    
 app = QApplication(sys.argv)
 
 ventana = VentanaPrincipal()
