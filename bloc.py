@@ -119,13 +119,6 @@ class VentanaPrincipal(QMainWindow):
         printit()
         
             
-
-    
-        
-        
-             
-       
-            
     
 app = QApplication(sys.argv)
 
