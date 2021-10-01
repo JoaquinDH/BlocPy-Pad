@@ -1,5 +1,6 @@
 import os
-from PyQt5.QtCore import QFileInfo, QUrl
+from PyQt5 import QtGui
+from PyQt5.QtCore import QFile, QFileInfo, QUrl
 from PyQt5.QtWidgets import *
 import sys
 
@@ -25,11 +26,28 @@ class VentanaPrincipal(QMainWindow):
 
             name = (os.path.basename(str1))
 
-            f = open("texto.txt", "r")
+            f = open(name, "r")
             leido = f.read()
             
             texto.setText(leido)
+            f.close()
+
+        
+        def guardar(self):
+            nombre = QFileDialog.getSaveFileName()
+            str1 = ''.join(nombre)
+
+            name = (os.path.basename(str1))
+    
+            name = (name.replace('All Files (*)', ''))
+         
+            f = open(name, "w")
             
+            escritura = texto.toPlainText()
+
+            f.write(escritura)
+
+
 
 
     #Se crea el contenedor vertical
@@ -58,6 +76,8 @@ class VentanaPrincipal(QMainWindow):
         botonGuardar.setText("Guardar")
         contenedorHorizontal.addWidget(botonGuardar)
 
+        botonGuardar.clicked.connect(guardar)
+
         
 
     #Boton Nuevo..
@@ -67,11 +87,19 @@ class VentanaPrincipal(QMainWindow):
     #Selector de File para botonAbrir
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.AnyFile)
+
         
+    #Selector de File para botonGuardar
+
         
+
+
     #Parte del texto
         texto = QTextEdit()
         contenedorVertical.addWidget(texto)
+
+        
+        
      
     
 app = QApplication(sys.argv)
