@@ -1,3 +1,4 @@
+import threading
 import os
 from PyQt5 import QtGui
 from PyQt5.QtCore import QFile, QFileInfo, QUrl
@@ -55,10 +56,6 @@ class VentanaPrincipal(QMainWindow):
                 x = pop2.exec_()
                 
 
-        
-
-
-
     #Se crea el contenedor vertical
         contenedorVertical = QVBoxLayout()
 
@@ -97,7 +94,6 @@ class VentanaPrincipal(QMainWindow):
         contenedorHorizontal.addWidget(botonGuardar)
 
         botonGuardar.clicked.connect(guardar)
-
         
 
     #Selector de File para botonAbrir
@@ -109,9 +105,27 @@ class VentanaPrincipal(QMainWindow):
         texto = QTextEdit()
         contenedorVertical.addWidget(texto)
 
+    #Word Counter
+        contador = QLabel()   
+        contenedorVertical.addWidget(contador)
+        contador.setText("")
+        
+        def printit():
+            threading.Timer(1.0, printit).start()
+            contadorPlain = texto.toPlainText()
+            contadorLength = len(contadorPlain)
+            contador.setText(str(contadorLength))
+
+        printit()
+        
+            
+
     
         
-     
+        
+             
+       
+            
     
 app = QApplication(sys.argv)
 
