@@ -26,14 +26,18 @@ class VentanaPrincipal(QMainWindow):
 
             name = (os.path.basename(str1))
 
-            f = open(name, "r")
-            leido = f.read()
-            
-            texto.setText(leido)
-            f.close()
+            if name != "":
+                
 
+                f = open(name, "r")
+                leido = f.read()
+                
+                texto.setText(leido)
+                f.close()
+            else:
+                x = pop.exec_()
         
-        def guardar(self):
+        def guardar(self):   
             nombre = QFileDialog.getSaveFileName()
             str1 = ''.join(nombre)
 
@@ -41,12 +45,17 @@ class VentanaPrincipal(QMainWindow):
     
             name = (name.replace('All Files (*)', ''))
          
-            f = open(name, "w")
-            
-            escritura = texto.toPlainText()
+            if name != "":
+                f = open(name, "w")
+                
+                escritura = texto.toPlainText()
 
-            f.write(escritura)
+                f.write(escritura)
+            else:
+                x = pop2.exec_()
+                
 
+        
 
 
 
@@ -61,7 +70,18 @@ class VentanaPrincipal(QMainWindow):
 
     #Contenedor horizontal
         contenedorHorizontal = QHBoxLayout()
-       
+
+    #PopUp
+        pop = QMessageBox()
+        pop.setWindowTitle("Oh no no no")
+        pop.setText("Ningun archivo elegido, instalando Bonzi Buddy...")
+
+    #PopUp2
+        pop2 = QMessageBox()
+        pop2.setWindowTitle("ok")
+        pop2.setText("ok")
+
+
     #Boton abrir
         botonAbrir = QPushButton("Abrir")
         contenedorHorizontal.addWidget(botonAbrir)
@@ -80,25 +100,16 @@ class VentanaPrincipal(QMainWindow):
 
         
 
-    #Boton Nuevo..
-        botonNuevo = QPushButton("Nuevo..")
-        contenedorHorizontal.addWidget(botonNuevo)
-
     #Selector de File para botonAbrir
         dialog = QFileDialog()
         dialog.setFileMode(QFileDialog.AnyFile)
 
-        
-    #Selector de File para botonGuardar
-
-        
-
-
+         
     #Parte del texto
         texto = QTextEdit()
         contenedorVertical.addWidget(texto)
 
-        
+    
         
      
     
